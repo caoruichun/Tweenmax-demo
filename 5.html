@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tweenMax</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+        }
+        .div1{
+            width:100px;
+            height:100px;
+            background: #8d121a;
+            position: absolute;
+            top: 50px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1"></div>
+    <script src="jquery.min.js"></script>
+    <script src="TweenMax.min.js"></script>
+    <script>
+        $(function(){
+            var t=new TimelineMax();
+            t.add("state1");
+            t.to(".div1",1,{left:300,ease:Bounce.easeInOut},1);
+            t.add("state2");
+            t.to(".div1",1,{width:300,ease:Bounce.easeOut},"+=1");
+            t.add("state3");
+            t.to(".div1",1,{height:300,ease:Bounce.easeOut});
+        })
+    </script>
+</body>
+</html>

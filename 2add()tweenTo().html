@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tweenMax</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+   <div id="div1"></div>
+    <script src="jquery.min.js"></script>
+    <script src="TweenMax.min.js"></script>
+    <script>
+        /*
+          TweenTo完成指定的动画(过渡);
+                参数:指定时间或状态的字符串
+          t.seek(时间/状态/[boolean])完成指定的动画(无过渡)
+          t.time()动画已执行的时间
+          t.clear();//清除所有动画
+        */
+        $(function(){
+            var t=new TimelineMax();
+            t.to("#div1",2,{left:300,onComplete:function(){
+                alert("执行了吗?");
+            }});
+            t.add("state1");
+            t.add(function(){
+                $('#div1').css('background','blue');
+            });
+            t.to("#div1",2,{width:300});
+            t.add("state2")
+            t.clear();//清除state2之前的所有动画，后面的动画依然继续执行
+            t.to("#div1",2,{height:300});
+            //t.stop();
+            //t.tweenTo(2.5);//完成指定的动画(过渡);
+            //t.tweenTo("state2");
+            //t.seek(2);//直接执行设置的时间点后面的动画,时间点前面的动画会瞬间执行完成
+            //t.seek('state2');//直接执行设置的状态后面的动画,状态点前面的动画会瞬间执行完成
+            //t.seek("state1",true);//false会执行前面动画的事件,true不会执行前面动画的事件
+            console.log(t.time());//动画已经执行的时间
+            
+        })
+        
+    </script>
+</body>
+</html>

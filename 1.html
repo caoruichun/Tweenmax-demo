@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tweenMax.js</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: #8D121A;
+            position: absolute;
+            left: 0;
+            top: 100px;
+        }
+
+    </style>
+</head>
+
+<body>
+   <input type="button" id="play" value="播放">
+   <input type="button" id="stop" value="停止">
+   <input type="button" id="reverse" value="反向动画">
+
+    <div id="div1">
+    </div>
+    <script src="jquery.min.js"></script>
+    <script src="TweenMax.min.js"></script>
+    <script>
+        $(function() {
+            //t.stop();停止动画
+            //t.play();开始动画
+            //reverse();反向开始动画
+//            onComplete();运动结束后出发对应的函数
+//            onReverseComplete();反向运动结束后触发对应的函数
+//            t.add('字符串'/函数);添加状态
+            var t = new TimelineMax();
+            console.log(t);
+            //t.to("元素选择器或对象"，持续时间，对象{变化的属性：值,[事件]},动画延迟执行的时间)
+            /*列表中的动画依次执行*/
+            //t.stop();
+            t.to("#div1", 1, {
+                left: 300
+            },1);
+            t.add("state1");
+            t.to("#div1", 1, {
+                height: 300
+            },0);
+            t.add("state2");
+            t.to("#div1", 1, {
+                width: 300,
+                rotationZ:180,onComplete:function(){
+                alert('旋转')
+            },onReverseComplete(){
+                alert('反向')
+            }},"+=1");
+            t.add(function(){
+                $("#div1").css("background","red");
+            });
+            t.to("#div1", 1, {
+                opacity:0
+            },"+=1");
+            
+            /*添加第四个属性,设置动画的延迟时间,延迟时间相同,动画同时执行
+                t.to("#div1",1,{left:300},1);
+                t.to("#div1",1,{height:300},1);
+                t.to("#div1",1,{width:300},1);
+            */
+            $('#play').click(function(){
+                t.play(); //开始动画
+            });
+            $('#stop').click(function(){
+                t.stop(); //停止动画
+            });
+            $('#reverse').click(function(){
+                t.reverse();
+            })
+        });
+    </script>
+</body>
+
+</html>

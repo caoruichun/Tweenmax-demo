@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tweenMax</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #8d121a;
+            margin: 1px 0;
+        }
+        #div1{
+            width:100px;
+            height:100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+   <div id="div1"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+   <div class="box"></div>
+    <script src="jquery.min.js"></script>
+    <script src="TweenMax.min.js"></script>
+    <script>
+    $(function(){
+        /*
+          staggerTo("元素选择器或对象",持续时间,对象,动画延迟发生时间);
+          t.totalDuration();获取动画的总时长
+          t.getLabelTime();返回从开始到当前状态的时间
+        */
+        var t = new TimelineMax();
+        //t.to(".box",1,{width:300});//to()下的所有动画会同时进行,而staggerTo()下的动画会一个接一个的依次执行
+        t.to("#div1",1,{width:1000});
+        t.add('state1');
+        t.staggerTo(".box",2,{width:1000},1);
+        t.totalDuration();
+        console.log(t.totalDuration());
+        console.log(t.getLabelTime("state1"));
+    })
+    </script>
+</body>
+</html>

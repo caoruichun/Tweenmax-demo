@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tweenMax</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        .div1{
+            width: 100px;
+            height: 100px;
+            background: #8d121a;
+            position: absolute;
+            top: 150px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="label"></div>
+    <div class="div1"></div>
+    <script src="jquery.min.js"></script>
+    <script src="TweenMax.min.js"></script>
+    <script>
+        $(function(){
+            var t=new TimelineMax();
+            t.add("state1");
+            t.to(".div1",1,{left:300,onComplete:function(){
+                getCurrentLabel();//获取当前状态
+            }},1);
+            t.add("state2");
+            t.to(".div1",1,{width:300,onComplete:function(){
+                getCurrentLabel();
+            }},"+=1");
+            t.add("state3");
+            t.to(".div1",1,{height:300,onComplete:function(){
+                getCurrentLabel();
+            }});
+            getCurrentLabel();
+            //获取当前状态
+            function getCurrentLabel(){
+                //获取当前的时间
+                var currentTime=t.getLabelTime(t.currentLabel());//获取当前的时间
+                //获取到上一个状态
+                var beforeLabel=t.getLabelBefore(currentTime);
+                //获取到下一个状态
+                var afterLabel=t.getLabelAfter(currentTime);
+                var str="<p>上一个状态:"+beforeLabel+"</p><p>当前状态:"+t.currentLabel()+"</p><p>下一个状态:"+afterLabel+"</p>";
+                $("#label").html(str);
+                //console.log(t.currentLabel());//控制台打印输出当前动画运动到的状态
+            }
+        });
+    </script>
+</body>
+</html>
